@@ -1,0 +1,82 @@
+.rad {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border-top: 1px solid var(--kant);
+  border-left: 3px solid transparent;
+  list-style: none;
+}
+
+.rad[data-valgt='true'] {
+  background: var(--valgt-flate);
+  border-left-color: var(--valgt-kant);
+}
+
+.tekst {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.navn {
+  font-weight: 600;
+  /* Lange varenavn skal brytes, ikke kuttes. */
+  overflow-wrap: anywhere;
+}
+
+.detaljer,
+.kommentar {
+  color: var(--tekst-dempet);
+  font-size: 0.8125rem;
+  overflow-wrap: anywhere;
+}
+
+.kommentar {
+  font-size: 0.75rem;
+  font-style: italic;
+}
+
+.teller {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+.borHa {
+  color: var(--tekst-dempet);
+  font-size: 0.75rem;
+  white-space: nowrap;
+  margin-right: 0.25rem;
+}
+
+.knapp {
+  width: var(--trykkflate);
+  height: var(--trykkflate);
+  border: 1px solid var(--kant);
+  border-radius: 50%;
+  background: var(--flate-hev);
+  font-size: 1.25rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.knapp:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.felt {
+  width: 2.75rem;
+  height: var(--trykkflate);
+  text-align: center;
+  border: 1px solid var(--kant);
+  border-radius: var(--radius);
+  background: var(--flate-hev);
+  color: var(--tekst);
+  font-variant-numeric: tabular-nums;
+}
