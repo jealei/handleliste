@@ -1,0 +1,21 @@
+.rutenett {
+  column-count: 1;
+  column-gap: 1rem;
+  padding: 1rem;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* Fold 6 utbrettet, portrett */
+@media (min-width: 640px) {
+  .rutenett {
+    column-count: 2;
+  }
+}
+
+/* Utbrettet landskap og desktop */
+@media (min-width: 1000px) {
+  .rutenett {
+    column-count: 3;
+  }
+}
