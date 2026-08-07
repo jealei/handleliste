@@ -95,9 +95,16 @@ av `kategori + vare + merke`, normalisert:
 - `æ→ae`, `ø→oe`, `å→aa`
 - alt annet enn `a-z0-9` blir `-`, gjentatte `-` slås sammen, ledende/etterfølgende `-` fjernes
 
-Merke inngår fordi `Ketchup` finnes to ganger i kategorien Pålegg (Idun og Heinz). Importskriptet
-**avbryter med feil** hvis to varer får samme id, og en test verifiserer det samme på byggetid.
-Skulle en fremtidig kollisjon oppstå der også merke er likt, legges `-2`, `-3` … til.
+Merke inngår fordi `Ketchup` finnes to ganger i kategorien Pålegg (Idun og Heinz).
+
+Slug-algoritmen finnes **kun i TypeScript** (`lib/slug.ts`), ikke i importskriptet. Skriptet
+skriver bare en flat, ordrett avskrift av arket til `data/rader.ts`; `data/handleliste.ts`
+grupperer radene og regner ut id-ene ved import. Da finnes algoritmen ett sted og kan
+enhetstestes, i stedet for å være duplisert i Python og TypeScript der de to kunne drifte fra
+hverandre. `data/handleliste.ts` **kaster** ved duplikat id, slik at en kollisjon blir en
+byggefeil og ikke stille datatap.
+
+Verifisert mot dagens ark: 112 varer gir 112 unike id-er, ingen kollisjoner.
 
 `Kategori.id` bygges med samme normalisering, fra kategorinavnet alene — f.eks.
 `Tørrvare / hermetikk / krydder` → `toerrvare-hermetikk-krydder`. Den brukes kun som React-nøkkel
@@ -136,10 +143,15 @@ får vi hydreringsavvik i React.
 | `components/Verktoylinje.tsx` | Klistret topplinje: modusbryter, antall, Nullstill, Logg ut |
 | `components/KategoriKort.tsx` | Ett kategorikort med eget antall-merke |
 | `components/VareRad.tsx` | Én varerad med teller |
+| `components/RegistrerSW.tsx` | Registrerer service worker etter `load` |
 | `lib/lagring.ts` | `localStorage`-innpakning, trygg mot SSR og feil |
 | `lib/config.ts` | `basePath`-konstanten. Eneste sted repo-navnet står |
-| `data/handleliste.ts` | Generert varedata |
+| `lib/slug.ts` | Id-generering. Eneste sted algoritmen finnes |
+| `lib/filter.ts` | Handletur-filter og opptelling |
+| `data/rader.ts` | Generert, ordrett avskrift av arket |
+| `data/handleliste.ts` | Grupperer rader til kategorier, regner ut id-er |
 | `scripts/les-excel.py` | Importskript, kjøres manuelt |
+| `scripts/lag-ikoner.py` | Genererer PWA-ikoner, kjøres én gang |
 
 Hver komponent kan forstås uten å lese de andre. Tilstand eies ett sted (`Handleliste.tsx`) og
 sendes ned som props; `VareRad` og `KategoriKort` er rene visningskomponenter.
@@ -271,6 +283,14 @@ Vitest, avgrenset til det som faktisk kan gå i stykker:
 3. **Slug-funksjonen** — norske tegn translittereres; kjente kollisjoner (de to `Ketchup`-radene)
    gir ulike id-er.
 4. **Handletur-filter** — tar kun med varer `> 0`; fjerner kategorier som blir tomme.
+5. **Telleren** — `−` er deaktivert på 0, så antallet kan ikke bli negativt; `+` øker med 1;
+   skriving av ikke-siffer i feltet gir 0, ikke `NaN`.
+6. **Nullstill** — ett trykk sletter ingenting; to trykk sletter; ventetid mellom trykkene
+   avbryter.
+
+Punkt 5 og 6 krever komponenttester, og dermed `@testing-library/react` i tillegg til Vitest og
+jsdom. De er tatt med fordi begge er stille feil: en negativ teller ser nesten riktig ut, og en
+Nullstill som utløses på første trykk oppdages først når arbeid allerede er borte.
 
 Ingen e2e-suite. Appen er en statisk liste; kostnaden ved et browserbasert oppsett står ikke i
 forhold til risikoen.
