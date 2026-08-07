@@ -1,0 +1,65 @@
+.skjerm {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: var(--merke);
+}
+
+.kort {
+  width: 100%;
+  max-width: 22rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  background: var(--flate-hev);
+}
+
+.tittel {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.undertittel {
+  margin: 0 0 1.5rem;
+  color: var(--tekst-dempet);
+}
+
+.merkelapp {
+  margin-bottom: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.felt {
+  height: var(--trykkflate);
+  padding: 0 0.75rem;
+  border: 1px solid var(--kant);
+  border-radius: var(--radius);
+  background: var(--flate);
+  color: var(--tekst);
+}
+
+.feil {
+  margin: 0.5rem 0 0;
+  color: #b3261e;
+  font-size: 0.875rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .feil {
+    color: #ff8a80;
+  }
+}
+
+.knapp {
+  margin-top: 1rem;
+  min-height: var(--trykkflate);
+  border: none;
+  border-radius: var(--radius);
+  background: var(--merke);
+  color: var(--merke-tekst);
+  font-weight: 600;
+}
