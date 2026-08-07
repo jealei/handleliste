@@ -158,18 +158,30 @@ sendes ned som props; `VareRad` og `KategoriKort` er rene visningskomponenter.
 
 ### Layout
 
-CSS multi-column (`column-count` + `break-inside: avoid`) på beholderen rundt kategorikortene.
-Brytepunkter følger viewport-bredde, ikke enhetsdeteksjon, slik at layouten tilpasser seg når
-telefonen brettes ut midt i bruk — uten JavaScript.
+Kategorikortene fordeles på spalter i JavaScript (`lib/spalter.ts`) og rendres som
+flex-spalter. Brytepunktene følger viewport-bredde, ikke enhetsdeteksjon, og oppdateres ved
+`resize`, slik at layouten tilpasser seg når telefonen brettes ut midt i bruk.
 
-| Bredde | Kolonner | Typisk tilstand |
+| Bredde | Spalter | Typisk tilstand |
 |---|---|---|
 | `< 640px` | 1 | Fold-6 dekselskjerm |
 | `640–1000px` | 2 | Fold 6 utbrettet, portrett |
 | `> 1000px` | 3 | Utbrettet landskap, desktop |
 
-Multi-column er valgt framfor CSS Grid fordi kategoriene har svært ulik høyde (Pålegg har 41
-varer, «Sesongvarer, jul» har 1). Grid ville gitt store hull; multi-column pakker kortene tett.
+**CSS multi-column ble prøvd først og fungerte ikke.** `column-count` balanserer ved å ANSLÅ
+hvor høy hver spalte blir, men `break-inside: avoid` forbyr å dele et kort. Med kategorier så
+ulike som Pålegg (41 varer) og «Sesongvarer, jul» (1) spriker anslaget kraftig fra faktisk
+plassering: målt på ekte data ble spaltehøydene 46 og 88 — den venstre spalta tok slutt midt på
+skjermen, med et stort tomrom under.
+
+Høydene er kjent på forhånd, så fordelingen regnes ut i stedet for å anslås. Algoritmen
+plasserer tyngste kort først i den laveste spalta, og sorterer så hver spalte tilbake til
+regnearkets rekkefølge — god balanse uten at kortene ender opp sortert etter størrelse.
+Resultat på samme data: 68 og 66, og i den ferdige rendringen slutter spaltene 85 px fra
+hverandre på en side som er nesten 4000 px høy.
+
+Brytepunktene står som konstanter i `Rutenett.tsx`, ikke i CSS, siden det er JavaScript som gjør
+fordelingen. To sannheter om samme tall ville kommet ut av synk.
 
 ### Varerad
 

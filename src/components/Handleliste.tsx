@@ -62,16 +62,17 @@ export function Handleliste({ onLoggUt }: { onLoggUt: () => void }) {
             hele lista.
           </p>
         ) : (
-          <Rutenett>
-            {synlige.map((kategori) => (
+          <Rutenett
+            kategorier={synlige}
+            renderKort={(kategori) => (
               <KategoriKort
                 key={kategori.id}
                 kategori={kategori}
                 kjop={kjop}
                 onEndre={endre}
               />
-            ))}
-          </Rutenett>
+            )}
+          />
         )}
       </main>
     </>

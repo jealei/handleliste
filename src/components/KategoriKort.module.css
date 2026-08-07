@@ -3,10 +3,8 @@
   border: 1px solid var(--kant);
   border-radius: var(--radius);
   overflow: hidden;
-  /* Kortet skal aldri deles over to spalter. */
-  break-inside: avoid;
-  page-break-inside: avoid;
-  margin: 0 0 1rem;
+  /* Avstanden mellom kort styres av `gap` i spalta, ikke av marg her. */
+  margin: 0;
 }
 
 .tittel {
