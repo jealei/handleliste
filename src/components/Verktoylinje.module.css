@@ -1,0 +1,65 @@
+.linje {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  padding-top: max(0.5rem, env(safe-area-inset-top));
+  background: var(--merke);
+  color: var(--merke-tekst);
+}
+
+.venstre {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.tittel {
+  font-weight: 700;
+}
+
+.antall {
+  font-size: 0.8125rem;
+  opacity: 0.85;
+  white-space: nowrap;
+}
+
+.hoyre {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.knapp,
+.bryter,
+.fare,
+.fareAktiv {
+  min-height: var(--trykkflate);
+  padding: 0 0.75rem;
+  border-radius: var(--radius);
+  border: 1px solid rgb(255 255 255 / 0.35);
+  background: transparent;
+  color: var(--merke-tekst);
+  font-size: 0.8125rem;
+  white-space: nowrap;
+}
+
+.bryter[aria-checked='true'] {
+  background: var(--merke-tekst);
+  color: var(--merke);
+  border-color: var(--merke-tekst);
+  font-weight: 600;
+}
+
+.fareAktiv {
+  background: #b3261e;
+  border-color: #b3261e;
+  color: #ffffff;
+  font-weight: 700;
+}
