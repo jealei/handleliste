@@ -10,13 +10,17 @@ npm install
 npm run dev
 ```
 
-Passord: `Tønsberg!`
+Åpne **<http://localhost:4000/handleliste/>**. Passord: `Tønsberg!`
+
+Adressen må ha `/handleliste/` med — appen kjører under den stien, både lokalt
+og på GitHub Pages. Under utvikling sender rota deg dit automatisk, men Next
+skriver ut den nakne adressen i terminalen, så bruk lenka over.
 
 ## Kommandoer
 
 | Kommando | Hva den gjør |
 |---|---|
-| `npm run dev` | Utviklingsserver |
+| `npm run dev` | Utviklingsserver på port 4000 |
 | `npm test` | Kjører testene |
 | `npm run build` | Statisk eksport til `out/` |
 | `npm run importer` | Leser regnearket på nytt til `src/data/rader.ts` |

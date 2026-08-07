@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
 /**
  * Omdirigering som bare finnes under `next dev`.
  *
- * Med basePath satt svarer utviklingsserveren 404 på http://localhost:3000/
+ * Med basePath satt svarer utviklingsserveren 404 på rota (http://localhost:4000/)
  * — men det er nettopp den adressen Next skriver ut i terminalen ved
  * oppstart, uten prefikset. Den naturlige lenka å klikke er altså den som
  * ikke virker, og Next sin egen 404-side er helsvart i mørk modus.
