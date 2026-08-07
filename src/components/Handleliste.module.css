@@ -1,0 +1,8 @@
+.tom {
+  max-width: 28rem;
+  margin: 3rem auto;
+  padding: 0 1.5rem;
+  color: var(--tekst-dempet);
+  text-align: center;
+  text-wrap: balance;
+}
