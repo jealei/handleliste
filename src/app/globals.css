@@ -1,0 +1,77 @@
+/*
+ * Fargene er definert som variabler ett sted, og bare overstyrt i mørk modus.
+ * Begge temaer holder minst 4.5:1 kontrast på brødtekst.
+ */
+:root {
+  --merke: #1b4d3e;
+  --merke-tekst: #f5f1e8;
+  --flate: #f7f6f2;
+  --flate-hev: #ffffff;
+  --kant: #dedbd2;
+  --tekst: #16201c;
+  --tekst-dempet: #5c6b64;
+  --valgt-flate: #e6f0ea;
+  --valgt-kant: #1b4d3e;
+  --radius: 12px;
+  /* Minste trykkflate. Under dette blir knappene vanskelige med tommelen. */
+  --trykkflate: 44px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --merke: #2f7d63;
+    --merke-tekst: #f5f1e8;
+    --flate: #121715;
+    --flate-hev: #1b2320;
+    --kant: #2e3a35;
+    --tekst: #e8ede9;
+    --tekst-dempet: #9aa8a1;
+    --valgt-flate: #1c3229;
+    --valgt-kant: #4bbf95;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  /* Hindrer at iOS/Android forstørrer teksten når telefonen brettes ut. */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--flate);
+  color: var(--tekst);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+  /* Plass til systemlinjer når appen kjører i standalone-modus. */
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+input {
+  font: inherit;
+}
+
+/* Synlig fokusmarkering for tastaturbruk, uten ring ved museklikk. */
+:focus-visible {
+  outline: 3px solid var(--valgt-kant);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
