@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { Handleliste } from '@/components/Handleliste'
+import { Laster } from '@/components/Laster'
 import { Passordlas } from '@/components/Passordlas'
 import { erOpplast, settOpplast } from '@/lib/lagring'
 
@@ -17,7 +18,9 @@ export default function Side() {
     setKlar(true)
   }, [])
 
-  if (!klar) return null
+  // Aldri `null` her: da blir den ferdigbygde HTML-en tom, og en side som
+  // ikke får kjørt JavaScript viser bare en svart skjerm uten forklaring.
+  if (!klar) return <Laster />
 
   if (!opplast) {
     return (

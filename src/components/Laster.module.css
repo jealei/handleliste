@@ -1,0 +1,23 @@
+.skjerm {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  background: var(--merke);
+  color: var(--merke-tekst);
+  text-align: center;
+}
+
+.tittel {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.tekst {
+  margin: 0;
+  opacity: 0.8;
+}
