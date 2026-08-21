@@ -16,7 +16,7 @@ describe('Handleliste', () => {
   it('laster lagrede verdier fra localStorage', async () => {
     window.localStorage.setItem(
       NOKKEL_KJOP,
-      JSON.stringify({ 'drikkevarer-eplejuice-eldorado': 4 }),
+      JSON.stringify({ 'drikkevarer-eplejuice-sunniva': 4 }),
     )
     render(<Handleliste onLoggUt={vi.fn()} />)
     const felt = await screen.findByRole('textbox', { name: /Antall Eplejuice/i })
@@ -34,7 +34,7 @@ describe('Handleliste', () => {
     render(<Handleliste onLoggUt={vi.fn()} />)
     const knapp = await screen.findByRole('button', { name: /Flere Eplejuice/i })
     await userEvent.click(knapp)
-    expect(lesKjop()).toEqual({ 'drikkevarer-eplejuice-eldorado': 1 })
+    expect(lesKjop()).toEqual({ 'drikkevarer-eplejuice-sunniva': 1 })
   })
 
   it('oppdaterer antallet i verktøylinja', async () => {

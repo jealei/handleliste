@@ -32,8 +32,9 @@ skriver ut den nakne adressen i terminalen, så bruk lenka over.
 2. `npm run importer`
 3. `npm test` — sjekker at antallet stemmer og at ingen id-er kolliderer.
    Endret du antall varer, må tallene i `src/data/handleliste.test.ts`
-   oppdateres tilsvarende.
-4. Commit `src/data/rader.ts`.
+   oppdateres tilsvarende. Endret du navn eller merke på en vare som står
+   som id-literal i `src/components/Handleliste.test.tsx`, må den skrives om.
+4. Commit `src/data/rader.ts` sammen med testene du måtte rette.
 
 Vare-id-ene er utledet av kategori + vare + merke. Endrer du et varenavn eller
 et merke, får varen ny id og mister den lagrede Kjøp-verdien sin. Det er en
